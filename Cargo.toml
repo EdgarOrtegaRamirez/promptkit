@@ -1,0 +1,18 @@
+[package]
+name = "promptkit"
+version = "1.0.0"
+edition = "2021"
+description = "Rich interactive CLI toolkit — spinners, progress bars, confirmations, menus, checkboxes, tables, and more"
+license = "MIT"
+authors = ["Edgar Ortega"]
+
+[dependencies]
+ratatui = "0.29"
+crossterm = "0.28"
+indicatif = "0.17"
+clap = { version = "4.5", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+unicode-width = "0.2"
+colored = "3.0"
