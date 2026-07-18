@@ -146,7 +146,11 @@ fn main() {
     let cli = Cli::parse();
 
     match cli.command {
-        Commands::Spinner { message, style, interval } => {
+        Commands::Spinner {
+            message,
+            style,
+            interval,
+        } => {
             use promptkit::spinner::{Spinner, SpinnerStyle};
             let spinner_style = match style.to_lowercase().as_str() {
                 "lines" => SpinnerStyle::Lines,
@@ -227,7 +231,10 @@ fn main() {
                 .collect();
             promptkit::table::print_table(&header_vec, table_rows);
         }
-        Commands::Prompt { message, placeholder } => {
+        Commands::Prompt {
+            message,
+            placeholder,
+        } => {
             let mut p = promptkit::prompt::Prompt::new(&message);
             if let Some(ph) = placeholder {
                 p = p.placeholder(&ph);

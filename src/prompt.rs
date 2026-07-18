@@ -3,6 +3,7 @@
 use std::io::{self, Write};
 
 /// A prompt with optional placeholder and validator
+#[allow(clippy::type_complexity)]
 pub struct Prompt {
     message: String,
     placeholder: Option<String>,
@@ -44,7 +45,10 @@ impl Prompt {
 
         loop {
             if let Some(ref placeholder) = self.placeholder {
-                print!("{}{}{}{} (default: {}){}: ", white, self.message, reset, dim, placeholder, reset);
+                print!(
+                    "{}{}{}{} (default: {}){}: ",
+                    white, self.message, reset, dim, placeholder, reset
+                );
             } else {
                 print!("{}{}{}: ", white, self.message, reset);
             }
@@ -61,7 +65,7 @@ impl Prompt {
 
                     if let Some(ref validator) = self.validator {
                         if let Some(err) = validator(&value) {
-                            println!("  {}Error:{} {}", "\x1b[31m", reset, err);
+                            println!("  \x1b[31mError: {} {}", reset, err);
                             input.clear();
                             continue;
                         }

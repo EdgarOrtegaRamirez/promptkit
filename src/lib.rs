@@ -4,22 +4,22 @@
 //! applications with spinners, progress bars, confirmations, menus, checkboxes,
 //! tables, and more.
 
-pub mod spinner;
-pub mod progress;
+pub mod checkbox;
 pub mod confirm;
 pub mod menu;
-pub mod checkbox;
-pub mod table;
-pub mod prompt;
-pub mod theme;
 pub mod output;
+pub mod progress;
+pub mod prompt;
+pub mod spinner;
+pub mod table;
+pub mod theme;
 
-pub use spinner::*;
-pub use progress::*;
+pub use checkbox::*;
 pub use confirm::*;
 pub use menu::*;
-pub use checkbox::*;
-pub use table::*;
-pub use prompt::*;
-pub use theme::*;
 pub use output::*;
+pub use progress::*;
+pub use prompt::*;
+pub use spinner::*;
+pub use table::*;
+pub use theme::*;

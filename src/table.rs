@@ -10,17 +10,12 @@ pub struct Column {
     pub align: ColumnAlign,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum ColumnAlign {
+    #[default]
     Left,
     Right,
     Center,
-}
-
-impl Default for ColumnAlign {
-    fn default() -> Self {
-        ColumnAlign::Left
-    }
 }
 
 /// A formatted table
@@ -93,7 +88,7 @@ impl Table {
         println!();
 
         // Print separator
-        for (i, col) in self.columns.iter().enumerate() {
+        for (i, _col) in self.columns.iter().enumerate() {
             if i > 0 {
                 print!("  ");
             }
@@ -149,5 +144,11 @@ pub fn print_table(headers: &[&str], rows: Vec<Vec<String>>) {
             print!("{}", cell);
         }
         println!();
+    }
+}
+
+impl Default for Table {
+    fn default() -> Self {
+        Self::new()
     }
 }

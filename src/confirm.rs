@@ -21,12 +21,12 @@ pub fn confirm(message: &str, style: ConfirmStyle) -> bool {
         ConfirmStyle::Symbol => "✓/✗",
     };
 
-    let green = "\x1b[32m";
+    let _green = "\x1b[32m";
     let white = "\x1b[37m";
     let reset = "\x1b[0m";
 
     loop {
-        print!("{} {} {}{}{} ", message, white, prompt, reset, ": ");
+        print!("{} {} {}{}: ", message, white, prompt, reset);
         let _ = io::stdout().flush();
 
         let mut input = String::new();
@@ -49,7 +49,11 @@ pub fn confirm(message: &str, style: ConfirmStyle) -> bool {
                         }
                     }
                     ConfirmStyle::Symbol => {
-                        if trimmed.is_empty() || trimmed == "y" || trimmed == "yes" || trimmed == "✓" {
+                        if trimmed.is_empty()
+                            || trimmed == "y"
+                            || trimmed == "yes"
+                            || trimmed == "✓"
+                        {
                             return true;
                         } else if trimmed == "n" || trimmed == "no" || trimmed == "✗" {
                             return false;

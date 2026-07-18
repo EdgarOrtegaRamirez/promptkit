@@ -76,7 +76,7 @@ impl Spinner {
         let interval_ms = self.interval_ms;
         let message = self.message.clone();
 
-        let thread = thread::spawn(move || f());
+        let thread = thread::spawn(f);
         let mut count = 0u64;
         while !thread.is_finished() {
             thread::sleep(Duration::from_millis(interval_ms));
@@ -101,7 +101,7 @@ impl Spinner {
         let interval_ms = self.interval_ms;
         let message = self.message.clone();
 
-        let thread = thread::spawn(move || f());
+        let thread = thread::spawn(f);
         let mut count = 0u64;
         while !thread.is_finished() {
             thread::sleep(Duration::from_millis(interval_ms));
@@ -137,10 +137,7 @@ impl Spinner {
         let clear = "\r\x1b[2K";
         let red = "\x1b[31m";
         let reset = "\x1b[0m";
-        print!(
-            "{}{} ✗ {} — {}{}",
-            clear, red, self.message, reason, reset
-        );
+        print!("{}{} ✗ {} — {}{}", clear, red, self.message, reason, reset);
         let _ = std::io::Write::flush(&mut std::io::stdout());
     }
 }

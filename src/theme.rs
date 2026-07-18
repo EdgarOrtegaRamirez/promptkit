@@ -9,24 +9,29 @@ pub struct Theme {
 }
 
 impl Theme {
-    /// Default ANSI theme
-    pub fn default() -> Self {
+    /// Create a default ANSI theme with standard colors
+    pub fn new() -> Self {
         let mut colors = HashMap::new();
-        colors.insert("success".to_string(), "\x1b[32m".to_string());    // Green
-        colors.insert("error".to_string(), "\x1b[31m".to_string());     // Red
-        colors.insert("warning".to_string(), "\x1b[33m".to_string());   // Yellow
-        colors.insert("info".to_string(), "\x1b[34m".to_string());      // Blue
-        colors.insert("label".to_string(), "\x1b[36m".to_string());     // Cyan
-        colors.insert("dim".to_string(), "\x1b[2m".to_string());        // Dim
-        colors.insert("bold".to_string(), "\x1b[1m".to_string());       // Bold
-        colors.insert("reset".to_string(), "\x1b[0m".to_string());      // Reset
+        colors.insert("success".to_string(), "\x1b[32m".to_string()); // Green
+        colors.insert("error".to_string(), "\x1b[31m".to_string()); // Red
+        colors.insert("warning".to_string(), "\x1b[33m".to_string()); // Yellow
+        colors.insert("info".to_string(), "\x1b[34m".to_string()); // Blue
+        colors.insert("label".to_string(), "\x1b[36m".to_string()); // Cyan
+        colors.insert("dim".to_string(), "\x1b[2m".to_string()); // Dim
+        colors.insert("bold".to_string(), "\x1b[1m".to_string()); // Bold
+        colors.insert("reset".to_string(), "\x1b[0m".to_string()); // Reset
         Self { colors }
     }
 
     /// Apply a color to text
     pub fn apply(&self, text: &str, color: &str) -> String {
         if let Some(code) = self.colors.get(color) {
-            format!("{}{}{}", code, text, self.colors.get("reset").unwrap_or(&String::new()))
+            format!(
+                "{}{}{}",
+                code,
+                text,
+                self.colors.get("reset").unwrap_or(&String::new())
+            )
         } else {
             text.to_string()
         }

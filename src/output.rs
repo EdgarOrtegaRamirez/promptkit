@@ -56,7 +56,10 @@ pub fn warning(msg: &str) {
 }
 
 /// Write JSON to a file
-pub fn write_json_file(path: &str, data: &impl Serialize) -> Result<(), Box<dyn std::error::Error>> {
+pub fn write_json_file(
+    path: &str,
+    data: &impl Serialize,
+) -> Result<(), Box<dyn std::error::Error>> {
     let json = serde_json::to_string_pretty(data)?;
     std::fs::write(path, json)?;
     Ok(())

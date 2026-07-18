@@ -35,10 +35,13 @@ pub fn checkbox(items: &mut [CheckboxItem], title: &str) -> Vec<String> {
     println!();
 
     // Display the checkboxes
-    for (i, item) in items.iter().enumerate() {
+    for item in items.iter() {
         let checked_str = if item.checked { green } else { dim };
         let check = if item.checked { "✓" } else { " " };
-        println!("  {}{}{} {}{}", checked_str, check, reset, white, item.label);
+        println!(
+            "  {}{}{} {}{}",
+            checked_str, check, reset, white, item.label
+        );
     }
 
     println!();
@@ -51,12 +54,13 @@ pub fn checkbox(items: &mut [CheckboxItem], title: &str) -> Vec<String> {
         Ok(_) => {
             let trimmed = input.trim();
             if let Ok(n) = trimmed.parse::<usize>() {
-                if n >= 0 && n < items.len() {
+                if n < items.len() {
                     items[n].checked = !items[n].checked;
                 }
             }
             // Return all checked items
-            items.iter()
+            items
+                .iter()
                 .filter(|i| i.checked)
                 .map(|i| i.value.clone())
                 .collect()
@@ -67,7 +71,7 @@ pub fn checkbox(items: &mut [CheckboxItem], title: &str) -> Vec<String> {
 
 /// Simple multi-select that allows choosing multiple items by number
 pub fn multi_select(items: &[String], title: &str) -> Vec<usize> {
-    let blue = "\x1b[34m";
+    let _blue = "\x1b[34m";
     let cyan = "\x1b[36m";
     let white = "\x1b[37m";
     let reset = "\x1b[0m";
@@ -80,7 +84,7 @@ pub fn multi_select(items: &[String], title: &str) -> Vec<usize> {
     println!();
 
     for (i, item) in items.iter().enumerate() {
-        println!("  {}{}{} {}{}", cyan, format!("[{}] ", i + 1), reset, white, item);
+        println!("  {}[{}] {} {}{}", cyan, i + 1, reset, white, item);
     }
 
     println!();

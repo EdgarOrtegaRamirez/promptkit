@@ -59,10 +59,7 @@ pub fn menu(items: &[MenuItem], title: &str) -> Option<String> {
 
 /// Display a yes/no menu and return the choice
 pub fn yes_no_menu(message: &str) -> Option<bool> {
-    let items = vec![
-        MenuItem::new("Yes", "yes"),
-        MenuItem::new("No", "no"),
-    ];
+    let items = vec![MenuItem::new("Yes", "yes"), MenuItem::new("No", "no")];
     match menu(&items, message) {
         Some(v) if v == "yes" => Some(true),
         Some(v) if v == "no" => Some(false),

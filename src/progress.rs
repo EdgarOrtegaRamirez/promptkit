@@ -68,19 +68,26 @@ impl ProgressBar {
         let light_gray = "\x1b[90m";
         let reset = "\x1b[0m";
 
-        let filled_color = if filled >= self.bar_width { green } else { dark_green };
+        let filled_color = if filled >= self.bar_width {
+            green
+        } else {
+            dark_green
+        };
 
         let mut line = String::new();
         line.push_str("\r\x1b[2K ");
         line.push_str(filled_color);
         line.push_str(&bar);
         line.push_str(reset);
-        line.push_str(" ");
+        line.push(' ');
         line.push_str(&self.prefix);
         line.push_str(&self.message);
-        line.push_str(" ");
+        line.push(' ');
         line.push_str(light_gray);
-        line.push_str(&format!("{}/{} {:.1}%", self.current, self.total, percentage));
+        line.push_str(&format!(
+            "{}/{} {:.1}%",
+            self.current, self.total, percentage
+        ));
         line.push_str(reset);
         line.push('\n');
 
